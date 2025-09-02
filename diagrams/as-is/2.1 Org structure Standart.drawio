@@ -1,0 +1,155 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.2">
+  <diagram id="xedVLAODQOGw6i7QZKYp" name="2.1 Орг. структура, Стандарт">
+    <mxGraphModel dx="1480" dy="1043" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-10" value="Банк &quot;Стандарт&quot;" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="950" y="140" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-16" value="Управление обслуживанием в сети отделений (50 отделений - 500 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="300" y="470" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-35" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-10" target="c4EZk2OI0lp2Rh3AsvLy-11" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="300" y="120" as="sourcePoint" />
+            <mxPoint x="400" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-40" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-11" target="c4EZk2OI0lp2Rh3AsvLy-16" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="40" y="120" as="sourcePoint" />
+            <mxPoint x="400" y="450" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="570" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-41" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-11" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="40" y="120" as="sourcePoint" />
+            <mxPoint x="1210" y="470" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="990" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-49" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="72" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="960" y="530" as="sourcePoint" />
+            <mxPoint x="960" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-50" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="72" y="175.5" width="100" height="100" as="geometry">
+            <mxPoint x="960" y="620" as="sourcePoint" />
+            <mxPoint x="960" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-57" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-11" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="40" y="120" as="sourcePoint" />
+            <mxPoint x="670" y="470" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="670" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-58" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-11" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="40" y="120" as="sourcePoint" />
+            <mxPoint x="960" y="470" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="960" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-63" value="IT-отдел" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="860" y="470" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-64" value="Управление обслуживанием депозитных продуктов (50 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1110" y="470" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-65" value="Кол-центр (200 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="570" y="470" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-66" value="Команда интернет-банка (10 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="860" y="560" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-67" value="Команда АБС (20 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="860" y="650" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-83" value="Управление обслуживанием кредитных продуктов (50 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="470" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-84" value="Команда цифровой трансформации розничного бизнеса (10 человек)" style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;whiteSpace=wrap;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;" parent="1" vertex="1">
+          <mxGeometry x="1610" y="470" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-85" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-11" target="c4EZk2OI0lp2Rh3AsvLy-83" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="790" y="260" as="sourcePoint" />
+            <mxPoint x="1660" y="610" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1100" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-86" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-11" target="c4EZk2OI0lp2Rh3AsvLy-84" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="1420" y="380" as="sourcePoint" />
+            <mxPoint x="1840" y="590" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1550" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-87" value="Внешняя команда интернет-банка (10 человек)" style="rounded=1;fillColor=#647687;strokeColor=#314354;shadow=1;fontStyle=1;fontColor=#ffffff;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;html=1" parent="1" vertex="1">
+          <mxGeometry x="860" y="730" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-88" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;dashed=1;strokeColor=#314354;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#647687;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-87" target="c4EZk2OI0lp2Rh3AsvLy-66" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="960" y="1000" as="sourcePoint" />
+            <mxPoint x="1260" y="940" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="820" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-91" value="Внешняя команда поддержки (5 человек)" style="rounded=1;fillColor=#647687;strokeColor=#314354;shadow=1;fontStyle=1;fontColor=#ffffff;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;html=1" parent="1" vertex="1">
+          <mxGeometry x="570" y="650" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-93" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;dashed=1;strokeColor=#314354;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#647687;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-91" target="c4EZk2OI0lp2Rh3AsvLy-65" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="520" y="1250" as="sourcePoint" />
+            <mxPoint x="520" y="840" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="530" y="770" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-94" value="Партнерский кол-центр (100 человек)" style="rounded=1;fillColor=#647687;strokeColor=#314354;shadow=1;fontStyle=1;fontColor=#ffffff;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;html=1" parent="1" vertex="1">
+          <mxGeometry x="570" y="560" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-95" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;dashed=1;strokeColor=#314354;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#647687;" parent="1" source="c4EZk2OI0lp2Rh3AsvLy-94" target="c4EZk2OI0lp2Rh3AsvLy-65" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="570" y="1250" as="sourcePoint" />
+            <mxPoint x="570" y="840" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="530" y="1020" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DbVgP95x4zuJVxRZpTHA-1" value="" style="edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=4;endArrow=block;endFill=1;fontStyle=1;strokeColor=#23445D;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="c4EZk2OI0lp2Rh3AsvLy-11" edge="1">
+          <mxGeometry x="22" y="165.5" width="100" height="100" as="geometry">
+            <mxPoint x="1050" y="260" as="sourcePoint" />
+            <mxPoint x="1720" y="470" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4EZk2OI0lp2Rh3AsvLy-11" value="Топ-менеджмент " style="rounded=1;fillColor=#10739E;strokeColor=none;shadow=1;gradientColor=none;fontStyle=1;fontColor=#FFFFFF;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="940" y="280" width="220" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
