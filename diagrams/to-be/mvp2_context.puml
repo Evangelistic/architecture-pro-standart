@@ -87,9 +87,9 @@ Rel(creditManager, emailSystem, "Получает и отправляет дан
 
 System_Ext(creditBureau, "Бюро кредитных историй", "Внешняя система, предоставляет данные о кредитных историях клиентов.")
 
-Rel(creditConveyor, creditScoringSystem, "Запрашивает кредитный скоринг", "REST API")
+Rel(creditConveyor, creditScoringSystem, "Запрашивает кредитный скоринг")
 Rel(creditConveyor, abs, "Получает одобренные заявки", "Через БД, раз в сутки")
 Rel(creditScoringSystem, abs, "Получает данные о клиентах и истории платежей", "Через БД, раз в сутки")
-Rel(creditScoringSystem, creditBureau, "Получает кредитные истории", "REST API")
+Rel(creditScoringSystem, creditBureau, "Получает кредитные истории")
 
 @enduml
