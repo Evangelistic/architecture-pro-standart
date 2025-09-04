@@ -67,8 +67,8 @@ Rel(old_internet_bank, abs, "Читает и записывает данные �
 Rel(bank_platform, abs, "Использует, через адаптер")
 
 Rel(bank_call_center, bank_platform, "Получает и отправляет события о новых заявках")
-Rel(bank_call_center, emailSystem, "Отправляет заявки в работу")
-Rel(callCenterPartnerOperator, emailSystem, "Получает заявки в работу")
+Rel(bank_call_center, callCenterPartnerOperator, "Отправляет email с заявками и ставками в работу")
+Rel_R(partner_bank_call_center, bank_platform, "Отправляет данные в ABC")
 
 Rel(frontOfficeManager, abs, "Работает в АБС, заводит заявки на депозиты и кредиты")
 Rel(frontOfficeManager, emailSystem, "Отправляет письма, получает ответы")
