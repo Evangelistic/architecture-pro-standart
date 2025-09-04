@@ -1,5 +1,3 @@
-@startuml Bank Platform - Container Diagram (ACL Model) - FINAL
-
 !include ../includes/C4_Container.puml
 
 LAYOUT_WITH_LEGEND()
@@ -13,19 +11,19 @@ title System Container Diagram for Banking Platform (ACL Model) - ОБНОВЛЕ
 Person(client, "Клиент Банка", "Использует банковские сервисы через веб-браузер и мобильное приложение.")
 Person_Ext(callCenterPartnerOperator, "Сотрудник партнерского кол-центра", "Оператор, принимающий звонки от клиентов.")
 
-System_Ext(old_internet_bank, "Старый интернет-банк", "Унаследованная система, доступная по прямой ссылке для старых функций.")
-System_Ext(old_site, "Сайт", "Показывает маркетинговую информацию")
+System_Ext(old_internet_bank, "Старый интернет-банк", "Унаследованная система на ASP.NET MVC 4.5. Доступна по прямой ссылке для старых функций.")
+System_Ext(old_site, "Сайт", "Собственная разработка на PHP и React.js. Показывает маркетинговую информацию.")
 
 ' --- Раскрываем CRM платформу, чтобы показать внутренний микросервис ---
 System_Boundary(crm_platform, "Платформа CRM") {
-    Container(lead_processor, "Микросервис обработки заявок", "Java / .NET", "Получает данные о новых заявках из Kafka, обрабатывает их и отправляет результат обратно для дальнейшей обработки внутри банка.")
-    Container_Ext(bank_call_center, "Система кол-центра", "Позволяет работать с заявками от клиентов")
+    Container(lead_processor, "Микросервис обработки заявок", "Java", "Получает данные о новых заявках из Kafka, обрабатывает их и отправляет результат обратно для дальнейшей обработки внутри банка.")
+    Container_Ext(bank_call_center, "Система кол-центра", "Веб-интерфейс на React.js, бэкенд на Java Spring Boot. Позволяет работать с заявками от клиентов.")
 
-    Rel(lead_processor, bank_call_center, "Регистрирует новые заявки и забирает информацию об закрытых")
+    Rel(lead_processor, bank_call_center, "Регистрирует новые заявки и забирает информацию об закрытых", "REST/HTTPS")
 }
-Container_Ext(partner_bank_call_center, "Система партнерского кол-центра", "Позволяет работать с заявками от клиентов")
-Rel(lead_processor, callCenterPartnerOperator, "Автоматическая выгрузка заявок для обработки")
-Rel(callCenterPartnerOperator, partner_bank_call_center, "Загружает заявки в систему")
+Container_Ext(partner_bank_call_center, "Система партнерского кол-центра", "Внешняя система. Позволяет работать с заявками от клиентов.")
+Rel(lead_processor, callCenterPartnerOperator, "Автоматическая выгрузка заявок для обработки", "SMTP")
+Rel(callCenterPartnerOperator, partner_bank_call_center, "Загружает заявки в систему", "Desktop/Web UI")
 
 ' ===================================
 '           System Boundary: Цифровой банк
@@ -62,9 +60,9 @@ System_Boundary(digital_bank, "Цифровой банк, необанк") {
     }
     ' --- Унаследованная система ---
     System_Boundary(legacy_system, "Legacy System (АБС)") {
-        Container_Ext(monolith_core, "Ядро монолита АБС", "Логика на PL/SQL", "Унаследованная бизнес-логика, реализованная в виде хранимых процедур.")
+        Container_Ext(monolith_core, "Ядро монолита АБС", "Логика на PL/SQL и интерфейс на Delphi", "Унаследованная бизнес-логика, реализованная в виде хранимых процедур.")
         ContainerDb_Ext(monolith_db, "База данных АБС", "Oracle DB", "Единственный источник правды для унаследованных финансовых данных.")
-        Rel(monolith_core, monolith_db, "Использует")
+        Rel(monolith_core, monolith_db, "Использует", "SQL")
     }
 
     ' ===================================
@@ -77,19 +75,19 @@ System_Boundary(digital_bank, "Цифровой банк, необанк") {
     Rel(bff, api_gateway, "API-запросы", "JSON/HTTPS")
     
     ' --- Шлюз -> Сервисы (Синхронные запросы) ---
-    Rel(api_gateway, ticket_service, "Маршрутизирует запросы к обращениям")
-    Rel(api_gateway, deposit_service, "Маршрутизирует запросы на открытие депозитов")
-    Rel(api_gateway, anti_corruption_layer, "Маршрутизирует запросы к унаследованным функциям АБС")
+    Rel(api_gateway, ticket_service, "Маршрутизирует запросы к обращениям", "REST/HTTPS")
+    Rel(api_gateway, deposit_service, "Маршрутизирует запросы на открытие депозитов", "REST/HTTPS")
+    Rel(api_gateway, anti_corruption_layer, "Маршрутизирует запросы к унаследованным функциям АБС", "REST/HTTPS")
 
     ' --- Взаимодействие с Legacy через ACL ---
-    Rel(deposit_service, anti_corruption_layer, "Получает/обновляет данные счетов через")
-    Rel(ticket_service, anti_corruption_layer, "Получает данные клиента через")
-    Rel(anti_corruption_layer, monolith_db, "Вызывает хранимые процедуры", "PL/SQL")
+    Rel(deposit_service, anti_corruption_layer, "Получает/обновляет данные счетов через", "REST/HTTPS")
+    Rel(ticket_service, anti_corruption_layer, "Получает данные клиента через", "REST/HTTPS")
+    Rel(anti_corruption_layer, monolith_db, "Вызывает хранимые процедуры", "SQL")
     
     ' --- Взаимодействие через Kafka (Асинхронные события) ---
-    Rel(api_gateway, kafka, "Публикует события", "Kafka Protocol")
-    Rel(ticket_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
-    Rel(deposit_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(api_gateway, kafka, "Публикует события", "Kafka")
+    Rel(ticket_service, kafka, "Публикует/подписывается на события", "Kafka")
+    Rel(deposit_service, kafka, "Публикует/подписывается на события", "Kafka")
     
     ' --- Взаимодействие с внешними системами ---
     Rel(lead_processor, kafka, "Подписывается на новые заявки и публикует обработанные", "Kafka")
