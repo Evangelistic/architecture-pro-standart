@@ -1,0 +1,95 @@
+@startuml C4 Context
+
+!include ../includes/C4_Context.puml
+
+Person(client, "Клиент", "Основной пользователь, который взаимодействует с банком офлайн и онлайн.")
+
+System_Ext(old_internet_bank, "Старый интернет-банк", "Проведение платежей и открытием текущих счетов, дебетовых карт")
+System_Ext(old_site, "Сайт", "Показывает маркетинговую информацию")
+System(internet_bank, "Новое приложение интернет-банка", "Единое приложение для всех клиентов банка")
+System(bank_platform, "Новая платформа банка", "Обеспечивает обработку всех входящих/исходящих данных")
+
+Rel(client, internet_bank, "Использует")
+Rel(bank_platform, old_internet_bank, "Проксирует")
+Rel(bank_platform, old_site, "Проксирует")
+Rel(internet_bank, bank_platform, "Использует")
+
+
+Boundary(frontOffice, "Фронт офис") {
+    Person(frontOfficeManager, "Сотрудник отделения", "Менеджер фронт-офиса, работает со всеми клиентами и их запросами в отделении.")
+
+    Boundary(callCenter, "Кол-центр") {
+        Person(callCenterOperator, "Сотрудник кол-центра", "Оператор, принимающий звонки от клиентов.")
+        Person(businessRepresentativeSpecialist, "Бизнес представитель банка", "Готовит скрипты для работы с клиентами.")
+        Person_Ext(callCenterContractorTeam, "Команда подрядчика кол-центра", "Поддерживает и дорабатывает систему кол-центра.")
+
+        Boundary(crm_platform, "Платформа CRM") {
+            System(bank_call_center, "Система кол-центра", "Внутренняя CRM система для обработки и регистрации обращений на платформе подрядчика")
+        }
+        Rel(callCenterOperator, bank_call_center, "Принимает звонки и регистрирует обращения")
+        Rel(callCenterContractorTeam, bank_call_center, "Поддерживает и дорабатывает")
+        
+        Boundary(callCenterPartner, "Партнёрский кол-центр") {
+            Person_Ext(callCenterPartnerOperator, "Сотрудник партнерского кол-центра", "Оператор, принимающий звонки от клиентов.")
+            System_Ext(partner_bank_call_center, "Система партнёрского кол-центра", "Внешняя система, используется для обработки звонков.")
+
+            Rel(callCenterPartnerOperator, partner_bank_call_center, "Принимает звонки и регистрирует обращения")
+        }
+
+        businessRepresentativeSpecialist --> callCenterPartnerOperator : Передает скрипты для работы с клиентами
+    }
+}
+
+Rel(client, callCenterOperator, "Звонит")
+Rel(client, frontOfficeManager, "Обращается лично в отделение")
+
+
+System_Ext(emailSystem, "Система электронной почты", "Используется для ручного обмена данными и запросами.")
+
+
+Boundary(backOffice, "Бэк офис") {
+    Person(backOfficeDepositManager, "Сотрудник отдела депозитов", "Менеджер, который специализируется на депозитах.")
+    Person(creditManager, "Сотрудник отдела кредитования", "Менеджер, который работает с кредитными заявками и риском.")
+
+    Boundary(banking_system, "Банковская система") {
+        System_Ext(abs, "Автоматизированная банковская система", "Автоматизированная банковская система, благодаря которой выполняется большинство операций в банке.")
+        System_Ext(creditConveyor, "Кредитный конвейер", "Коробочное решение, используется для обработки заявок на кредиты.")
+        System_Ext(creditScoringSystem, "Система кредитного скоринга", "Внутренняя разработка используется для расчета кредитного рейтинга клиента.")
+    }
+
+    Rel(creditManager, creditConveyor, "Обработка заявок на кредиты, изучает детали заявки")
+    Rel(creditManager, abs, "Анализируют текущий уровень кредитного риска")
+    Rel(backOfficeDepositManager, abs, "Обрабатывают заявки на депозиты из кол-центра, указывают ставки из Excel")
+}
+
+Rel(old_internet_bank, abs, "Читает и записывает данные в БД")
+
+Rel(bank_platform, abs, "Использует, через адаптер")
+
+Rel(bank_call_center, bank_platform, "Получает и отправляет события о новых заявках")
+Rel(bank_call_center, emailSystem, "Отправляет заявки в работу")
+Rel(callCenterPartnerOperator, emailSystem, "Получает заявки в работу")
+
+Rel(frontOfficeManager, abs, "Работает в АБС, заводит заявки на депозиты и кредиты")
+Rel(frontOfficeManager, emailSystem, "Отправляет письма, получает ответы")
+
+
+System_Ext(smsGateway, "СМС-шлюз", "Внутренний шлюз для отправки SMS.")
+System_Ext(telecomOperator, "Телеком оператор", "Внешнний сервис предоставляющий возможность отправки SMS.")
+
+Rel(abs, smsGateway, "Отправляет управляющие команды шлюзу на отправку СМС")
+Rel_R(smsGateway, telecomOperator, "Отправляет запросы на отправку СМС")
+
+
+Rel(backOfficeDepositManager, emailSystem, "Получает и отправляет запросы на ставки, Excel")
+Rel(creditManager, emailSystem, "Получает и отправляет данные по кредитному риску, Excel")
+
+
+System_Ext(creditBureau, "Бюро кредитных историй", "Внешняя система, предоставляет данные о кредитных историях клиентов.")
+
+Rel(creditConveyor, creditScoringSystem, "Запрашивает кредитный скоринг", "REST API")
+Rel(creditConveyor, abs, "Получает одобренные заявки", "Через БД, раз в сутки")
+Rel(creditScoringSystem, abs, "Получает данные о клиентах и истории платежей", "Через БД, раз в сутки")
+Rel(creditScoringSystem, creditBureau, "Получает кредитные истории", "REST API")
+
+@enduml
