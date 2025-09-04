@@ -1,0 +1,124 @@
+@startuml Bank Platform - Container Diagram
+
+!include ../includes/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Container Diagram for Banking Platform
+
+Person(client, "Клиент Банка", "Использует банковские сервисы через веб-браузер и мобильное приложение.")
+Person_Ext(callcenter_partner_employee, "Сотрудник партнерского кол-центра", "Оператор, принимающий звонки от клиентов.")
+
+Boundary(employee, "Сотрудники"){
+    Person(front_employee, "Сотрудник отделения", "Менеджер фронт-офиса, работает со всеми клиентами и их запросами в отделении.")
+
+    Person(back_credit_employee, "Сотрудник отдела кредитования", "Менеджер, который работает с кредитными заявками и риском.")
+    Person(back_deposit_employee, "Сотрудник отдела депозитов", "Менеджер, который специализируется на депозитах.")
+
+}
+
+System_Boundary(crm_platform, "Платформа CRM") {
+    Container(lead_processor, "Микросервис обработки заявок", "Java / .NET", "Получает данные о новых заявках из Kafka, обрабатывает их и отправляет результат обратно для дальнейшей обработки внутри банка.")
+    Container_Ext(bank_call_center, "Система кол-центра", "Позволяет работать с заявками от клиентов")
+
+    Rel(lead_processor, bank_call_center, "Регистрирует новые заявки и забирает информацию об закрытых")
+}
+
+Container_Ext(partner_bank_call_center, "Система партнерского кол-центра", "Позволяет работать с заявками от клиентов")
+
+
+Rel(lead_processor, callcenter_partner_employee, "Автоматическая выгрузка заявок для обработки")
+Rel(callcenter_partner_employee, partner_bank_call_center, "Загружает заявки в систему")
+
+
+    System_Boundary(digital_bank, "Цифровой банк, необанк") {
+        System_Ext(credit_conveyor, "Кредитный конвейер", "Коробочное решение, используется для обработки заявок на кредиты.")
+
+
+        System_Boundary(client_ui, "Новые приложения интернет-банка") {
+            Container_Ext(spa, "Single-Page App (Новый ИБ)", "React.js", "Предоставляет весь новый функционал интернет-банка через браузер.")
+            Container(bff, "Backend For Frontend", "Java, Spring Boot", "Агрегирует данные для клиентских приложений.")
+
+            Container(employee_spa, "Single-Page App (Сотрудник ИБ)", "React.js",  "Вход для сотрудников интернет-банка в зависимости от роли и функционала")
+        }
+
+
+        System_Boundary(bank_platform, "Новая платформа банка") {
+            Container_Ext(api_gateway, "API Gateway", "Kong/NGINX", "Обрабатывает все входящие запросы и направляет их в соответствующий сервис или ACL.")
+            ContainerQueue_Ext(kafka, "Kafka", "Apache Kafka", "Шина сообщений для асинхронного взаимодействия и горизонтального масштабирования.")
+            Container(anti_corruption_layer, "Anti-Corruption Layer (Фасад АБС)", "Java, Spring Boot", "Изолирует новые микросервисы от унаследованного монолита АБС. Транслирует запросы в вызовы PL/SQL.")
+
+            System_Boundary(microservices, "Микросервисы") {
+                Container_Ext(ticket_service, "Микросервис обработки обращений", "Java, Spring Boot", "Управляет жизненным циклом обращений клиентов.")
+                ContainerDb_Ext(ticket_db, "БД Обращений", "PostgreSQL", "Хранит данные по обращениям клиентов.")
+                Rel_D(ticket_service, ticket_db, "Читает/пишет", "JDBC")
+
+                Container_Ext(deposit_service, "Микросервис Открытие депозитов онлайн", "Java, Spring Boot", "Обрабатывает заявки и открывает депозиты для клиентов.")
+                ContainerDb_Ext(deposit_db, "БД Депозитов", "PostgreSQL", "Хранит данные по новым онлайн-депозитам.")
+                Rel_D(deposit_service, deposit_db, "Читает/пишет", "JDBC")
+
+                Container(credit_service, "Микросервис Открытие кредитов онлайн", "Java, Spring Boot", "Обрабатывает заявки на кредиты для клиентов.")
+                ContainerDb(credit_db, "БД Депозитов", "PostgreSQL", "Хранит данные по новым онлайн-кредитам.")
+                Rel_D(credit_service, credit_db, "Читает/пишет", "JDBC")
+
+                Container(rates_service, "Микросервис Управление ставками", "Java, Spring Boot", "Единая точка для расчета ставок и их публикации")
+                ContainerDb(rates_db, "БД Депозитов", "PostgreSQL", "Хранит данные по новым онлайн-кредитам.")
+                Rel_D(rates_service, rates_db, "Читает/пишет", "JDBC")
+
+                Container(scoring_service, "Микросервис Скоринга", "Java, Spring Boot", "Единая точка для расчета ставок и их публикации")
+                ContainerDb(scoring_db, "БД Депозитов", "PostgreSQL", "Хранит данные по новым онлайн-кредитам.")
+                Rel_D(scoring_service, scoring_db, "Читает/пишет", "JDBC")
+
+                Container(bki_service, "Микросервис БКИ", "Java, Spring Boot", "Единая точка для расчета ставок и их публикации")
+                ContainerDb(bki_db, "БД Депозитов", "PostgreSQL", "Хранит данные по новым онлайн-кредитам.")
+                Rel_D(bki_service, bki_db, "Читает/пишет", "JDBC")
+
+                Container(events_service, "Микросервис Уведомлений", "Java, Spring Boot", "Единая точка для расчета ставок и их публикации")
+                ContainerDb(events_db, "БД Депозитов", "PostgreSQL", "Хранит данные по новым онлайн-кредитам.")
+                Rel_D(events_service, events_db, "Читает/пишет", "JDBC")
+            }
+        }
+
+        Rel(back_credit_employee, credit_conveyor, "Обработка заявок на кредиты, изучает детали заявки")
+        Rel(credit_conveyor, api_gateway, "Получает данные")
+        
+    }
+
+
+    ' --- Клиент -> Шлюз ---
+    Rel_R(spa, bff, "API-запросы", "JSON/HTTPS")
+    Rel_L(employee_spa, bff, "API-запросы", "JSON/HTTPS")
+    Rel_R(client, spa, "Использует", "HTTPS")
+    Rel(employee, employee_spa, "Используют", "HTTPS")
+    Rel(bff, api_gateway, "API-запросы", "JSON/HTTPS")
+    
+    ' --- Шлюз -> Сервисы (Синхронные запросы) ---
+    Rel(api_gateway, ticket_service, "Маршрутизирует запросы к обращениям")
+    Rel(api_gateway, deposit_service, "Маршрутизирует запросы на открытие депозитов")
+    Rel(api_gateway, credit_service, "Маршрутизирует запросы на открытие кредитов")
+    Rel(api_gateway, rates_service, "Маршрутизирует запросы")
+    Rel(api_gateway, scoring_service, "Маршрутизирует запросы")
+    Rel(api_gateway, bki_service, "Маршрутизирует запросы")
+    Rel(api_gateway, events_service, "Маршрутизирует запросы")
+    Rel(api_gateway, anti_corruption_layer, "Маршрутизирует запросы к унаследованным функциям АБС")
+
+    ' --- Взаимодействие с Legacy через ACL ---
+    Rel(deposit_service, anti_corruption_layer, "Получает/обновляет данные счетов через")
+    Rel(ticket_service, anti_corruption_layer, "Получает данные клиента через")
+ 
+    ' --- Взаимодействие через Kafka (Асинхронные события) ---
+    Rel(api_gateway, kafka, "Публикует события", "Kafka Protocol")
+    Rel(ticket_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(deposit_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(credit_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(rates_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(scoring_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(bki_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(events_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    Rel(rates_service, kafka, "Публикует/подписывается на события", "Kafka Protocol")
+    
+    ' --- Взаимодействие с внешними системами ---
+    Rel(lead_processor, kafka, "Подписывается на новые заявки и публикует обработанные", "Kafka")
+
+
+@enduml
